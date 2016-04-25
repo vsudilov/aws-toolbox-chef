@@ -12,7 +12,7 @@ def my_private_ip
 end
 
 def my_instance_id
-	_get_metadata("instance-id")
+	_get_metadata("instance-id").body
 end
 
 def is_reachable?(host)
