@@ -33,7 +33,7 @@ ruby_block "update_dns" do
         updates = Set.new [my_private_ip]
         if not current_records.empty?
             for record in current_records[0].resource_records
-                if default['aws-toolbox']['prune_unreachables']:
+                if default['aws-toolbox']['prune_unreachables']
                     if is_reachable?(record.value)
                         updates.add(record.value)
                     end
