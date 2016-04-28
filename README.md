@@ -1,21 +1,14 @@
-aws-toolbox-chef Cookbook
+aws-toolbox Cookbook
 =========================
-TODO: Enter the cookbook description here.
 
-e.g.
-This cookbook makes your favorite breakfast sandwich.
 
 Requirements
 ------------
-TODO: List your cookbook requirements. Be sure to include any requirements this cookbook has on platforms, libraries, other cookbooks, packages, operating systems, etc.
+Assumed to be running in an AWS environment with a correctly defined IAM instance profile.
 
-e.g.
-#### packages
-- `toaster` - aws-toolbox-chef needs toaster to brown your bagel.
 
 Attributes
 ----------
-TODO: List your cookbook attributes here.
 
 e.g.
 #### aws-toolbox-chef::default
@@ -27,42 +20,37 @@ e.g.
     <th>Default</th>
   </tr>
   <tr>
-    <td><tt>['aws-toolbox-chef']['bacon']</tt></td>
+    <td><tt>['aws']['region']</tt></td>
+    <td>String</td>
+    <td>AWS region</td>
+    <td><tt>us-east-1</tt></td>
+  </tr>
+  <tr>
+    <td><tt>['aws-toolbox']['prune_unreachables']</tt></td>
     <td>Boolean</td>
-    <td>whether to include bacon</td>
+    <td>When updating the DNS record, remove any A records that did not respond to `ping -c1`</td>
     <td><tt>true</tt></td>
   </tr>
+
+  <tr>
+    <td><tt>['aws-toolbox']['hosted_zone_name']</tt></td>
+    <td>String</td>
+    <td>Route53 Host zone name</td>
+    <td><tt>unity</tt></td>
+  </tr>
+
+
+  <tr>
+    <td><tt>['aws-toolbox']['name']</tt></td>
+    <td>String</td>
+    <td>DNS Record to target</td>
+    <td><tt>node.hostname</tt></td>
+  </tr>
+
 </table>
 
-Usage
+Recipes
 -----
-#### aws-toolbox-chef::default
-TODO: Write usage instructions for each cookbook.
+#### aws-toolbox::update_dns
 
-e.g.
-Just include `aws-toolbox-chef` in your node's `run_list`:
-
-```json
-{
-  "name":"my_node",
-  "run_list": [
-    "recipe[aws-toolbox-chef]"
-  ]
-}
-```
-
-Contributing
-------------
-TODO: (optional) If this is a public cookbook, detail the process for contributing. If this is a private cookbook, remove this section.
-
-e.g.
-1. Fork the repository on Github
-2. Create a named feature branch (like `add_component_x`)
-3. Write your change
-4. Write tests for your change (if applicable)
-5. Run the tests, ensuring they all pass
-6. Submit a Pull Request using Github
-
-License and Authors
--------------------
-Authors: TODO: List authors
+Append this machine's private IP to the "#{name}.#{hostedzone}." route53 internal zone A record. When compiling the set of A records, optionally prune any IP addresses that are unreachable.

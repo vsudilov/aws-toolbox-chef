@@ -1,4 +1,4 @@
-name             'aws-toolbox-chef'
+name             'aws-toolbox'
 maintainer       'Vladimir Sudilovsky'
 maintainer_email 'vsudilovsky@carbonblack.com'
 license          'All rights reserved'
