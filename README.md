@@ -20,28 +20,27 @@ e.g.
     <th>Default</th>
   </tr>
   <tr>
-    <td><tt>['aws']['region']</tt></td>
+    <td><tt>node['aws']['region']</tt></td>
     <td>String</td>
     <td>AWS region</td>
     <td><tt>us-east-1</tt></td>
   </tr>
   <tr>
-    <td><tt>['aws-toolbox']['prune_unreachables']</tt></td>
+    <td><tt>node['aws-toolbox']['prune_unreachables']</tt></td>
     <td>Boolean</td>
     <td>When updating the DNS record, remove any A records that did not respond to `ping -c1`</td>
     <td><tt>true</tt></td>
   </tr>
 
   <tr>
-    <td><tt>['aws-toolbox']['hosted_zone_name']</tt></td>
+    <td><tt>node['aws-toolbox']['hosted_zone_name']</tt></td>
     <td>String</td>
     <td>Route53 Host zone name</td>
     <td><tt>unity</tt></td>
   </tr>
 
-
   <tr>
-    <td><tt>['aws-toolbox']['name']</tt></td>
+    <td><tt>node['aws-toolbox']['name']</tt></td>
     <td>String</td>
     <td>DNS Record to target</td>
     <td><tt>node.hostname</tt></td>
