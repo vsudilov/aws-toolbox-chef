@@ -16,6 +16,7 @@ end
 
 ruby_block "update_dns" do
     block do
+        require 'aws-sdk'
         hosted_zone = node['aws-toolbox']['host_zone_name']
         name = node['aws-toolbox']['name'].nil? ? node.hostname.sub(".local", "") : node.toolbox.name
         fqdn = "#{name}.#{hosted_zone}."
