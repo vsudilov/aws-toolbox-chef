@@ -7,8 +7,12 @@
 # All rights reserved - Do Not Redistribute
 #
 
-require 'aws-sdk'
 require 'set'
+
+chef_gem "aws-sdk" do
+  compile_time false
+  action :install
+end
 
 ruby_block "update_dns" do
     block do
