@@ -17,8 +17,8 @@ end
 ruby_block "update_dns" do
     block do
         require 'aws-sdk'
-        hosted_zone = node['aws-toolbox']['host_zone_name']
-        name = node['aws-toolbox']['name'].nil? ? node.hostname.sub(".local", "") : node.toolbox.name
+        hosted_zone = node['aws-toolbox']['hosted_zone_name']
+        name = node['aws-toolbox']['name'].nil? ? node.hostname.sub(".local", "") : node['aws-toolbox']['name']
         fqdn = "#{name}.#{hosted_zone}."
 
         c = Aws::Route53::Client.new(region: node['aws']['region'])
@@ -38,7 +38,7 @@ ruby_block "update_dns" do
         updates = Set.new [my_private_ip]
         if not current_records.empty?
             for record in current_records[0].resource_records
-                if default['aws-toolbox']['prune_unreachables']
+                if node['aws-toolbox']['prune_unreachables']
                     if is_reachable?(record.value)
                         updates.add(record.value)
                     end
